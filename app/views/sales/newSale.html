@@ -1,0 +1,132 @@
+ 
+<section class="content-header" ng-init="newSaleRequired()">
+
+<h3><i class="fa fa-home"></i>New Sales </h3>
+
+   <div class="breadcrumb-wrapper">
+                      <span class="label">You are here:</span>
+                         <ol class="breadcrumb">
+                            <li> <a href=""> Home </a> </li>
+                            <li class="active"> New Sales </li>
+                         </ol>
+                    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <div class="col-md-10">
+                        <div class="fomr-group">
+                            <label class="control-label col-md-2 col-sm-4">Supplier</label>
+                            <div class="col-md-4 col-sm-8">
+                                <select class="form-control" 
+                                    ng-options="stat.supid as stat.supnm for stat in suppliers" 
+                                    ng-model="test.supid"
+                                    ng-change="getMySlab(test.supid)"
+                                    >
+                                </select>
+                            </div>
+                            <input type="hidden" ng-model="mySlabc">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                            <a class="btn btn-back pull-right" href="#/Sales/Sale">
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th style=" width: 16%; ">Tên hàng</th>
+                                <th>Giá</th>
+                                <th>Giảm giá (%)</th>
+                                <th>Số lượng</th>
+                                <th>Tổng tiền phải trả</th>
+                                <th>Công cụ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="items in itemRows">
+                                <td>
+                                    {{$index+1}}
+                                </td>
+                                <td>
+                                    <select 
+                                    ng-disabled="!test.supid"
+                                    ng-options="stat as stat.inm for stat in allItems track by stat.id" 
+                                    ng-model="items.itemnm" placeholder="Item name"
+                                    class="form-control" ng-change="getDetails(items)">
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="items.price" placeholder="Price" class="form-control" ng-init="items.price=0" readonly>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="items.disc" placeholder="Discount" class="form-control" ng-init="items.disc=0">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="items.qty" placeholder="Qty" class="form-control" ng-init="items.qty=1">
+                                </td>
+                                <td>
+                                     {{items.qty * (items.price - (items.price * (items.disc/100))) }}
+                                </td>
+                                <td>
+                                    <i class="fa fa-trash icon" ng-click="remItemRow($index)"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                    <td colspan="6" class="right">
+                                        Total   
+                                    </td>
+                                    <td>{{totlmAmount() | roundMe }}      </td>
+                                    
+                            </tr>
+                            <tr>
+                                <td colspan="13"><button class="btn btn-danger btn-xs pull-right" ng-click="addItemRow()"><i class="fa fa-plus"></i> </button></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="right">
+                                    Tổng số tiền thanh toán (Bằng số)
+                                </td>
+                                <td colspan="5" class="right" style="
+                                font-size: 18px;
+                                font-weight: bold;
+                                color: red;
+                            ">{{ (totlmAmount() | number:0) }}</td>
+                                <td colspan="6"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="right">
+                                    ổng số tiền thanh toán (Bằng chữ)
+                                </td>
+                                <td colspan="5" class="right">{{totlmAmount() | number:0 | numToWords }}</td>
+                                <td colspan="6"></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">
+
+ 
+                <a class="btn btn-danger pull-right" href="#/Sales/Sale"><i class="fa fa-times"></i> &nbsp;Huỷ bỏ </a>
+
+
+                <input type="hidden" ng-value="{{totlmAmount()}}" ng-model="newt.admns"    >
+
+
+             <button class="btn btn-save pull-right" 
+             style="margin-right: 15px;" ng-click="saveSales(itemRows)">
+             <i class="fa fa-floppy-o"></i> &nbsp;Lưu lại </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
