@@ -1,0 +1,128 @@
+<!-- animated fadeInDown -->
+
+ 
+<div class="col-md-7 col-sm-6 col-xs-12 pinfo">
+  <div class="layer">
+    <section>
+      <div class="col-md-12">
+        <h1 class="white center">ĐỒ ÁN MÔN HỌC: CÔNG NGHỆ PHẦN MỀM</h1>
+        <p class="white center">GIAO DIỆN PHẦN MỀM QUẢN LÍ BÁN HÀNG ONLINE</p>
+        
+      </div>
+      <div class="col-md-offset-1">
+          <ul class="feature_ul animated zoomIn">
+              <li>Thông tin</li>
+              <li>Đề Tài: Xây dựng Giao diện phần mềm quản lí bán hàng quần áo</li>
+              <li>Ngôn ngữ lập trình: HTML,CSS,Jquery,Bootstrap, PHP</li>              
+            </ul>
+      </div>
+<!--
+      <div class="col-md-5 col-md-offset-1">
+          <ul class="feature_ul animated zoomIn">
+              <li>Thông tin</li>
+              <li>Thông tin</li>
+              <li>Thông tin</li>
+              <li>Thông tin</li>
+              <li>Thông tin</li>
+          </ul>
+        </div>
+-->
+        <div class="col-md-12 lg_contact">
+          <div class="col-md-6 col-md-offset-3">
+            <address>
+                Liên hệ :  Môn CNPM<br> 
+                EMail : luonghieu184@gmail.com<br>
+              </address>
+            </div>
+         </div>
+    </section>
+  </div>
+</div>
+
+<div class="col-md-5 col-sm-6 col-xs-12 animated fadeIn login-wrap">
+  <div class="login-page">
+    <div class="login-box" style="margin:0px">
+      <div class="login-box-body">
+        <p class="login-box-msg">
+          <img ng-src="public/img/company.png" style="height: 30%;width: 30%;">
+        </p>
+        <p class="login-box-msg"> ĐĂNG NHẬP QUẢN LÍ BÁN HÀNG </p>
+        <form name="loginForm" class="loginForm">
+          <div class="form-group has-feedback bottom25">
+            <input id="exampleInputEmail1" type="text" placeholder="Enter Username" autocomplete="off" required class="form-control"
+              ng-model="user.email">
+            <span class="fa fa-envelope form-control-feedback text-muted"></span>
+          </div>
+          <div class="form-group has-feedback bottom25">
+            <input id="exampleInputPassword1" type="password" placeholder="Password" class="form-control" ng-model="user.password" required>
+            <span class="fa fa-lock form-control-feedback text-muted"></span>
+          </div>
+          <div class="clearfix">
+            <div class="checkbox c-checkbox pull-left mt0">
+              <label>
+                <input type="checkbox" value="" name="remember" data-parsley-multiple="remember">
+                <span class="fa fa-check"></span>Lưu mật khẩu</label>
+            </div>
+            <div class="pull-right"><a href="#" class="text-muted">Lấy lại mật khẩu nếu bạn không nhớ</a>
+            </div>
+          </div>
+
+          <!-- <div class="form-group has-feedback">
+          <input type="text" class="form-control" placeholder="Username"required> 
+         </div>
+        <div class="form-group has-feedback">
+          <input type="password" class="form-control" placeholder="Password" >
+         </div> -->
+          <div class="row" style="  padding-top: 10px;">
+            <div class="col-xs-12">
+              <button class="btn btn-custom pull-right" ng-click="doLogin(user)" ng-disabled="loginForm.$invalid"><i class="fa fa-sign-in"></i> Đăng nhập</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/*body{
+    background:linear-gradient(to right, #238ce6 0, #2582b7 100%);
+}
+*/
+
+}
+  .login-box-msg {
+    padding: 0 20px 1px 20px;
+  }
+
+  canvas {
+    display: block;
+    vertical-align: bottom;
+  }
+
+  #particleJs {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #2E3F59;
+  }
+
+  body {
+    background-color: #eaebec;
+  }
+
+  .login-page {
+    background-color: transparent;
+  }
+
+  .login-box-body {
+    -webkit-box-shadow: -1px 0px 21px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 0px 21px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 0px 21px -4px rgba(0, 0, 0, 0.75);
+  }
+
+  .login-box-body input {
+    border-radius: 4px;
+    height: 35px;
+  }
+</style>
