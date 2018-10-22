@@ -1,0 +1,179 @@
+<section class="content-header" ng-init="initTaxList()">
+
+<h3><i class="fa fa-home"></i> Thông tin khách hàng </h3>
+
+   <div class="breadcrumb-wrapper">
+                      <span class="label">Danh mục: </span>
+                         <ol class="breadcrumb">
+                            <li> <a href=""> Quản trị </a> </li>
+                            <li class="active"> Khách hàng </li>
+                         </ol>
+                    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header"><i class="fa fa-edit"></i>
+                    <h3 class="box-title"> Khách hàng </h3>
+                    <button class="btn btn-new btn-sm pull-right" ng-click="newTax()"><i class="fa fa-plus"></i> Thêm mới khách hàng</button>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="width: 25px">STT</td>
+                                <th>Tên khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ </th>
+                                <th>Email</th>
+                                <th>Công cụ</th>
+                             </tr>
+                            <tr ng-repeat="slab in slabs">
+                                 
+                                <td>{{$index+1}}</td>
+                                <td>{{slab.TenKhachHang}}</td>
+                                <td>{{slab.SoDienThoai}}</td>
+                                <td>{{slab.DiaChi}}</td>
+                                <td>{{slab.Email}}</td>
+                                <td>
+                                    <i class="fa fa-pencil icon" ng-click="editSlab(slab.slabid)"></i>
+                                    <i class="fa fa-trash icon" ng-click="delSlab(slab.slabid)"></i> 
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="myModal" role="dialog" modal="taxModem" close="mtclose()">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="mtclose()">×</button>
+                <h4 class="modal-title">Thêm khách hàng mới</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ </th>
+                             <th>Email</th>             
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {{$index+1}}
+                            </td>
+                            <td>
+                                <input type="text" ng-model="taxes.TenKhachHang" placeholder="Điền tên khách hàng" class="form-control">
+                            </td>
+
+                            <td>
+                                <input type="text" ng-model="taxes.SoDienThoai" placeholder="Điền số điện thoại" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" ng-model="taxes.DiaChi" placeholder="Địa chỉ khách hàng" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" ng-model="taxes.Email" placeholder="Email của khách hàng" class="form-control">
+                            </td>
+
+                             
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer ">
+                <button type="submit " class="btn btn-save " ng-click="saveTaxes(taxes) "> <i class="fa fa-floppy-o"></i> Lưu lại</button>
+                <button class="btn " ng-click="mtclose() ">Huỷ bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModalEd" role="dialog" modal="taxModemEd" close="mtedclose()">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="mtedclose()">×</button>
+                <h4 class="modal-title">Chỉnh sữa thông tin </h4>
+            </div>
+            <div class="modal-body">
+                <form name="txxupfrm">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên khách hàng</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ </th>
+                             <th>Email</th>   
+                         </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {{$index+1}}
+                            </td>
+                            <td>
+                                <input type="text" ng-model="etaxes.TenKhachHang" placeholder="Tên" class="form-control" required>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="etaxes.SoDienThoai" placeholder="SDT" class="form-control" required>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="etaxes.DiaChi" placeholder="Địa chỉ" class="form-control" required>
+                            </td>
+                            <td>
+                                <input type="text" ng-model="etaxes.Email" placeholder="Email" class="form-control" required>
+                            </td>
+                             
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button  ng-disabled="txxupfrm.$invalid"  class="btn btn-save" ng-click="updateTaxes(etaxes) "> <i class="fa fa-floppy-o"></i> Lưu lại</button>
+                <button class="btn" ng-click="mtedclose() ">Thoát</button>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModalslb" role="dialog" modal="slbdelMod" close="txclose()">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" ng-click="txclose()">×</button>
+                    <h4 class="modal-title">Xoá mục</h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Bạn có muốn xoá không ? </h4>
+                     <input type="hidden" ng-model="txslbid">
+                </div>
+                <div class="modal-footer ">
+                    <button type="submit " class="btn btn-danger" ng-click="deleteTaxNow(txslbid)"><i class="fa fa-trash"></i>  Xoá luôn </button>
+                    <button class="btn " ng-click="txclose()">Không xoá nữa</button>
+                </div>
+            </div>
+        </div>
+    </div>
