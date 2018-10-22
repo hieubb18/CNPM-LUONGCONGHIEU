@@ -1,0 +1,41 @@
+@media only screen and (min-width: 320px) {
+    .comtx {
+        padding: 1% 28% 1% 28%;
+    }
+}
+
+
+/* Extra Small Devices, Phones */
+
+@media only screen and (min-width: 480px) {
+    .comtx {
+        padding: 1% 28% 1% 28%;
+    }
+}
+
+
+/* Small Devices, Tablets */
+
+@media only screen and (min-width: 768px) {
+    .comtx {
+        padding: 1% 28% 1% 28%;
+    }
+}
+
+
+/* Medium Devices, Desktops */
+
+@media only screen and (min-width: 992px) {
+    .comtx {
+        padding: 1% 28% 1% 28%;
+    }
+}
+
+
+/* Large Devices, Wide Screens */
+
+@media only screen and (min-width: 1200px) {
+    .comtx {
+        padding: 1% 28% 1% 28%;
+    }
+}
