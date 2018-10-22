@@ -1,0 +1,166 @@
+<section class="content-header" ng-init="loadItems()">
+
+    <h3><i class="fa fa-home"></i> Kho hàng </h3>
+
+    <div class="breadcrumb-wrapper">
+        <span class="label">Lối vào:</span>
+        <ol class="breadcrumb">
+            <li> <a href=""> Bảng điều khiển </a> </li>
+            <li class="active"> Bán hàng </li>
+        </ol>
+    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header"><i class="fa fa-edit"></i>
+                    <h3 class="box-title"> Danh sach mặt hàng trong kho</h3>
+                    <button class="btn btn-new btn-sm pull-right" ng-click="newItem()"><i class="fa fa-plus"></i> Thêm mới</button>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">STT</th>
+                                <th>Tên hàng</th>
+                                <th>Mã hàng</th>
+                                <th>Giá</th>
+                                <th>Công cụ</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr dir-paginate="item in allItems  | itemsPerPage: 10">
+                                <td>{{$index+1}}</td>
+                                <td>{{item.inm}}</td>
+                                <td>{{item.hsn}}</td>
+                                <td>{{item.price}}</td>
+                                <td>
+                                    <i class="fa fa-pencil icon" ng-click="editItem(item.id)">
+                                    </i>
+                                    <i class="fa fa-trash icon" ng-click="delItem(item.id)"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="10">
+                                    <dir-pagination-controls boundary-links="true" direction-links="true">
+                                    </dir-pagination-controls>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="myModal" role="dialog" modal="itemModem" close="mclose()">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="mclose()">×</button>
+                <h4 class="modal-title">Thêm hàng</h4>
+            </div>
+            <div class="modal-body">
+                <form name="itform">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Tên hàng</th>
+                                <th>Mã hàng</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" ng-model="items.itemnm" placeholder="Nhập tên hàng" class="form-control" required>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="items.hsn" placeholder="Nhập mã hàng" class="form-control" required>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="items.price" placeholder="Nhập giá" class="form-control" required>
+                                </td>
+   
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer ">
+                <button type="submit " class="btn btn-save" ng-disabled="itform.$invalid" ng-click="saveItems(items)"><i class="fa fa-floppy-o"></i>  Lưu lại </button>
+                <button class="btn " ng-click="mclose() ">Huỷ bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModalEd" role="dialog" modal="iteditModel" close="meclose()">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="meclose()">×</button>
+                <h4 class="modal-title">Chỉnh sửa hàng</h4>
+            </div>
+            <div class="modal-body">
+                <form name="itform1">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Tên hàng</th>
+                                <th>Mã hàng</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" ng-model="eitems.inm" placeholder="Item name" class="form-control" required>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="eitems.hsn" placeholder="HSN" class="form-control" required>
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="eitems.price" placeholder="Price" class="form-control" required>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer ">
+                <button type="submit " class="btn btn-save" ng-disabled="itform1.$invalid" ng-click="saveEdItems(eitems)"><i class="fa fa-floppy-o"></i>  Lưu lại </button>
+                <button class="btn " ng-click="meclose() ">Huỷ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="myModalEdl" role="dialog" modal="itDelModel" close="mdclose()">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="mdclose()">×</button>
+                <h4 class="modal-title">Xoá hàng này</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Bạn có chắc chắn xoá mặt hàng này </h4>
+                <input type="hidden" ng-model="delitemid">
+            </div>
+            <div class="modal-footer ">
+                <button type="submit " class="btn btn-danger" ng-click="deleteItemNow(delitemid)"><i class="fa fa-trash"></i>  Xoá </button>
+                <button class="btn " ng-click="mdclose() ">Huỷ</button>
+            </div>
+        </div>
+    </div>
+</div>
