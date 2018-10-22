@@ -1,0 +1,88 @@
+ 
+<section class="content-header"  ng-init="initCompany()">
+
+<h3><i class="fa fa-home"></i> Quản lí bán hàng </h3>
+
+   <div class="breadcrumb-wrapper">
+                      <span class="label">Bạn đang trong danh mục</span>
+                         <ol class="breadcrumb">
+                            <li> <a href=""> Home </a> </li>
+                            <li class="active"> Quản lí bán hàng </li>
+                         </ol>
+                    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="box box-primary">
+              <div class="box-header">
+                 <i class="fa fa-edit"></i> <h3 class="box-title"> Thông tin cửa hàng </h3>
+              </div>
+              <div class="box-body">
+                <div class="col-md-12 companybox">
+                  <div class="col-md-6">
+                 <table class="table table-bordered">
+                      <tr>
+                         <td> Tên cửa hàng </td>
+                         <td> <input type="text" class="form-control"  ng-model="company.comnm" placeholder="Điền tên cửa hàng"></td>
+                          
+                      </tr>
+                      <tr>
+                         <td> Địa chỉ  </td>
+                         <td> 
+                          <textarea class="form-control" placeholder="Điền địa chỉ nhà" ng-model="company.addr1"></textarea>
+                              <br>
+                             <textarea class="form-control" placeholder="Điện địa chỉ khác"  ng-model="company.addr2"></textarea>
+                         </td>
+                        </tr>
+                      <tr>
+                         <td> Thành phố </td>
+                         <td> <input type="text" class="form-control" placeholder="Thành phố"  ng-model="company.city"></td>
+                         
+                      </tr>
+
+                      <tr>
+                         <td> Mã bưu điện </td>
+                         <td> <input type="text" class="form-control" placeholder="Mã bưu điện" ng-model="company.zip"></td>
+                        
+                      </tr>
+                     
+                      
+                 </table>
+
+
+                 </div>
+
+                 <div class="col-md-6">
+                      <table class="table table-bordered">
+                        <tr>
+                            <td> Điện thoại liên lạc </td>
+                             <td> <input type="text" class="form-control" ng-model="company.telephone" placeholder="Số điện thoại"></td>
+                        </tr>
+                         <tr>
+                          <td> Địa chỉ email </td>
+                         <td> <input type="text" class="form-control" placeholder="Điền email của bạn" ng-model="company.email"></td>
+                        </tr>
+              
+                  <p style="font-weight: bold;font-size: 16px; text-align: center">Click nút button để lưu lại thông tin cửa hàng của bạn</p>
+                 <input type="hidden" ng-model="company.comid">
+                      </table>
+                 </div>
+                 <div class="col-md-12">
+
+                 </div>
+                 <div class="col-md-12 center">
+                 <button class="btn btn-success" ng-click="updateCompany(company)"><i class="fa fa-floppy-o"></i> Lưu lại </button>
+                 </div>
+               </div>
+               </div>
+               
+
+          </div>
+
+      </div>
+
+    </div>
+
+</section>
