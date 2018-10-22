@@ -1,0 +1,156 @@
+<section class="content-header" ng-init="loadSuppliers()">
+
+<h3><i class="fa fa-home"></i> Thông tin nhà cung cấp </h3>
+
+   <div class="breadcrumb-wrapper">
+                      <span class="label">Mục</span>
+                         <ol class="breadcrumb">
+                            <li> <a href=""> Quản trị </a> </li>
+                            <li class="active"> Nhà cung cấp sản phẩm </li>
+                         </ol>
+                    </div>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header"><i class="fa fa-edit"></i>
+                    <h3 class="box-title"> Danh sách nhà cung cấp mặt hàng </h3>
+                    <button class="btn btn-new btn-sm pull-right" ng-click="newSuppModel()"><i class="fa fa-plus"></i> Thêm mới thông tin nhà cung cấp</button>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Số thứ tự</th>
+                                    <th>Tên nhà cung cấpp</th>
+                                    <th>Tên Người liên hệ</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Email</th>
+                                    <th>Thành phố</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Công cụ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="supplier in suppliers | itemsPerPage: 10" >
+                                     <td>{{$index+1}}</td>
+                                    <td>{{supplier.supnm}}</td>
+                                    <td>{{supplier.contactp}}</td>
+                                    <td>{{supplier.contctno}}</td>
+                                    <td>{{supplier.email}}</td>
+                                    <td>{{supplier.stnm}}</td>
+                                    <td>{{supplier.supaddr}}</td>
+                                    <td>
+                                    
+                                    <i class="fa fa-pencil icon" ng-click="editItem(supplier.supid)" ></i>
+                                     
+                                    <i class="fa fa-trash icon" ng-click="delSup(supplier.supid)"></i> </td>
+                                </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box-footer">
+                     <dir-pagination-controls 
+                        boundary-links="true" 
+                        direction-links="true" >
+                     </dir-pagination-controls>
+
+                      
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="myModal" role="dialog" modal="supLierModem" close="msclose()">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="msclose()">×</button>
+                <h4 class="modal-title">Thêm nhà cung cấp</h4>
+            </div>
+            <div class="modal-body">
+                <form class="row form-horizontal" name="supform">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Tên nhà cung cấp<span class="starmark">*</span> </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="supplier.supnm" class="form-control" placeholder="Kho tên" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Tên người liên hệ<span class="starmark">*</span> </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="supplier.contactp" class="form-control" placeholder="Tên người liên hệ" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Số điện thoại<span class="starmark">*</span></label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="supplier.contctno" class="form-control " placeholder="Điện thoại số" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Email </label>
+                            <div class="col-md-8">
+                                <input type="text" ng-model="supplier.email" ng-init="supplier.email=''" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Thành Phố<span class="starmark">*</span></label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-options="stat.stid as stat.stnm for stat in states" ng-model="supplier.supstate">
+                                        </select>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Địa chỉ </label>
+                            <div class="col-md-8">
+                                <textarea placeholder="address" rows="2" ng-model="supplier.supaddr" ng-init="supplier.supaddr=''" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-save" ng-disabled="supform.$invalid" ng-click="saveSupplier(supplier)"><i class="fa fa-floppy-o"></i>  Lưu lại </button>
+                <button class="btn " ng-click="msclose() ">Huỷ bỏ</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<div class="modal fade" id="myModalEdl" role="dialog" modal="supDelModel" close="supclose()">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="supclose()">×</button>
+                <h4 class="modal-title">Xoá </h4>
+            </div>
+            <div class="modal-body">
+                <h4>Bạn có chắc chắn xoá mặt hàng này </h4>
+                 <input type="hidden" ng-model="delitemid">
+            </div>
+            <div class="modal-footer ">
+                <button type="submit " class="btn btn-danger" ng-click="deleteSupNow(delsupid)"><i class="fa fa-trash"></i>  Xoá </button>
+                <button class="btn " ng-click="supclose() ">Huỷ xoá</button>
+            </div>
+        </div>
+    </div>
+</div>
