@@ -1,0 +1,129 @@
+ 
+<section class="content-header" ng-init="initSales()">
+
+<h3><i class="fa fa-home"></i> Sales </h3>
+
+   <div class="breadcrumb-wrapper">
+                      <span class="label">You are here:</span>
+                         <ol class="breadcrumb">
+                            <li> <a href=""> Home </a> </li>
+                            <li class="active"> Sales </li>
+                         </ol>
+                    </div>
+</section>
+
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header"><i class="fa fa-edit"></i>
+                    <h3 class="box-title"> Sales List </h3>
+                    <a class="btn btn-new btn-sm pull-right" ng-click="newItem()" href="#/Sales/NewSale"><i class="fa fa-plus"></i> New Sale</a>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                       
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th style="width: 30px">#</th>
+                                <th>Mã Sản Phẩm</th>
+                                <th>Ngày lập hoá đơn</th>
+                                <th>Tên kho cung cấp</th>
+                                <th>Tên khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Tổng cộng</th>
+
+                                <th></th>
+                             </tr>
+                             </thead>
+                              <tbody>
+                            <tr ng-repeat="sale in salesl">
+                                <td>
+                                    <a class="fa fa-print icon" target="_blank" data-ng-href="api/reports/salesPrint.php?SaleH={{sale.shid}}"></a>
+                                </td>
+                                <td>{{$index+1}}</td>
+                                <td>{{sale.shid}}</td>
+                                <td>{{sale.saledt}} </td>
+                                <td>{{sale.supnm}} </td>
+                                <td>{{sale.contactp}}</td>
+                                <td>{{sale.contctno}}</td>
+                                <td>{{sale.Total | number:0 }}</td>
+
+                                <td>
+                                   <a class="fa fa-edit icon" href="#/Sales/Sale/{{sale.shid}}"></a>
+                                 <a class="fa fa-trash icon"></a>
+  
+                                </td>
+ 
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="myModal" role="dialog" modal="itemModem" close="mclose()">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="mclose()">×</button>
+                <h4 class="modal-title">Add Items</h4>
+            </div>
+            <div class="modal-body">
+                <select class="form-control" 
+                    ng-options="stat.supid as stat.supnm for stat in suppliers"
+                    ng-model="test.supid"
+                 >
+                </select>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Item</th>
+                            <th>HSN</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="items in itemRows">
+                            <td>
+                                {{$index+1}}
+                            </td>
+                            <td>
+                                <input type="text" ng-model="items.itemnm" placeholder="Item name" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" ng-model="items.hsn" placeholder="HSN" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" ng-model="items.unit" placeholder="Unit" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" ng-model="items.price" placeholder="Price" class="form-control">
+                            </td>
+                            <td><i class="fa fa-trash" ng-click="remItemRow($index)"></i></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"><button class="btn btn-danger btn-xs pull-right" ng-click="addItemRow()"><i class="fa fa-plus"></i> </button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-save" ng-click="saveItems(nurservice,serrow) "> Submit </button>
+                <button class="btn" ng-click="mclose() ">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
